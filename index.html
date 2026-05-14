@@ -44,6 +44,7 @@
         .main-scroll {
             max-height: calc(100vh - 36px);
             overflow-y: auto;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
         .main-scroll::-webkit-scrollbar { width: 4px; }
@@ -157,6 +158,31 @@
         .toc-item { display: grid; grid-template-columns: 24px 1fr; column-gap: 8px; padding: 8px 0; border: none; background: none; width: 100%; text-align: left; cursor: pointer; color: #6B6A64; font-family: 'Monaco', 'Menlo', monospace; font-size: 11px; border-left: 2px solid transparent; padding-left: 10px; margin-left: -12px; transition: all 0.15s; }
         .toc-item:hover { color: #E8E6E0; }
         .toc-item.active { color: #F2F0EA; border-left-color: #F2F0EA; }
+
+        /* Other-work navigator — jump between case studies from inside any sidebar */
+        .toc-other-section { margin-top: 28px; padding-top: 14px; border-top: 0.5px solid rgba(232,230,224,0.10); }
+        .toc-other-header { font-family: 'Monaco', 'Menlo', monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .toc-other {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 7px 0;
+            cursor: pointer;
+            color: #6B6A64;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-align: left;
+            transition: color 180ms ease;
+        }
+        .toc-other .toc-other-arr { color: #5A5954; transition: transform 200ms ease, color 180ms ease; }
+        .toc-other:hover { color: #E8E6E0; }
+        .toc-other:hover .toc-other-arr { color: #E8E6E0; transform: translateX(3px); }
+        .toc-back { margin-top: 12px; padding-top: 12px; border-top: 0.5px dashed rgba(232,230,224,0.10); color: #9A9890; }
+        .toc-back:hover { color: #F2F0EA; }
         .toc-num { color: #9A9890; font-size: 9px; letter-spacing: 0.06em; }
         .toc-item.active .toc-num { color: #F2F0EA; }
         .toc-name { letter-spacing: 0.02em; line-height: 1.3; font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: inherit; }
@@ -265,11 +291,345 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            /* Layout containers */
+            .section { padding: 24px 20px 36px; }
             .case-grid { grid-template-columns: 1fr; gap: 24px; }
             .toc-sticky { position: static; margin-bottom: 32px; }
             .ch-body { grid-template-columns: 1fr; gap: 24px; }
             .about-body { grid-template-columns: 1fr; gap: 32px; }
+            .case-content { padding: 0 20px; }
+
+            /* Big headlines scale down */
             .case-title { font-size: 48px; }
+            .ch-title { font-size: 36px !important; }
+
+            /* Index hero — name + watermark */
+            #index > div:first-child { padding: 40px 0 32px !important; }
+            #index p[style*="font-size: 120px"] { font-size: 52px !important; line-height: 1 !important; }
+            #index p[style*="font-size: 28px"] { font-size: 16px !important; }
+            .idx-watermark { font-size: 10vw !important; line-height: 0.9 !important; }
+
+            /* Project list rows — stack info vertically inside each row */
+            .idx-header { display: none !important; }
+            .proj-row {
+                display: grid !important;
+                grid-template-columns: 28px 1fr auto !important;
+                grid-template-areas: "num name arrow" "num tag year" !important;
+                row-gap: 2px !important;
+                column-gap: 12px !important;
+                padding: 14px 0 !important;
+            }
+            .proj-row .proj-num { grid-area: num; font-size: 9px !important; }
+            .proj-row .proj-name { grid-area: name; font-size: 22px !important; }
+            .proj-row .proj-tag { grid-area: tag; font-size: 9px !important; }
+            .proj-row .proj-year { grid-area: year; font-size: 9px !important; align-self: end; }
+            .proj-row .arr { grid-area: arrow; align-self: start; }
+
+            /* Sidebar foot inline */
+            .foot { flex-wrap: wrap; gap: 8px 12px; }
+
+            /* Index nav — tighter */
+            .nav { padding: 14px 20px !important; flex-wrap: wrap; gap: 8px 12px; }
+            .mark { font-size: 13px !important; }
+            .nav-links { gap: 14px !important; }
+
+            /* Browser bar URL — wrap */
+            .browser-bar { flex-wrap: wrap; }
+            .url { font-size: 9px; word-break: break-all; }
+
+            /* 4-column grids → 2-column on mobile (Contact, AEPLMV fact panel) */
+            [style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 20px !important;
+            }
+            [style*="grid-template-columns: 1fr 1fr 1fr 1fr"] {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+            /* 3-column grids → 1-column on mobile (logos, mockup grids, etc.) */
+            [style*="grid-template-columns: 1fr 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            /* 8-col flow halves to 4 */
+            [style*="grid-template-columns: repeat(8, 1fr)"] {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+            /* 2-column grids stay but smaller gap */
+            [style*="grid-template-columns: 1fr 1fr"] {
+                gap: 14px !important;
+            }
+
+            /* Komando + Salut Games Identity stages — collapse to flowing column */
+            [style*="position: relative; height: 780px"] {
+                height: auto !important;
+                min-height: 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 24px !important;
+                padding: 16px 0 !important;
+                margin-top: 16px !important;
+            }
+            [style*="position: relative; height: 780px"] > * {
+                position: static !important;
+                transform: none !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                width: auto !important;
+                max-width: 100% !important;
+            }
+            /* Process bg fades but no longer covers/overlaps */
+            [style*="position: relative; height: 780px"] > div[style*="opacity: 0.18"] {
+                width: 100% !important;
+                opacity: 0.14 !important;
+                order: -1;
+            }
+            /* Big logo images scale to fit */
+            [style*="position: relative; height: 780px"] img {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+                max-height: 380px !important;
+                object-fit: contain !important;
+            }
+            /* Wordmark + corner markers — keep but inline */
+            [style*="position: relative; height: 780px"] [style*="border: 0.5px solid #5A5954"] { display: none !important; }
+            /* Logo Design header inside dark inset block */
+            h3[style*="font-size: 52px"] { font-size: 32px !important; }
+            h3[style*="font-size: 52px"] + div { font-size: 32px !important; }
+
+            /* Big serif Contact headline */
+            h1[style*="font-size: 96px"] { font-size: 48px !important; line-height: 1 !important; }
+            h1[style*="font-size: 88px"] { font-size: 44px !important; line-height: 1 !important; }
+
+            /* Big italic taglines / pull quotes */
+            p[style*="font-size: 28px"] { font-size: 20px !important; }
+            p[style*="font-size: 24px"] { font-size: 18px !important; }
+            p[style*="font-size: 22px"] { font-size: 17px !important; }
+
+            /* Komando inset block padding */
+            section.chapter > div[style*="padding: 48px 56px 64px"] {
+                padding: 24px 20px 32px !important;
+            }
+
+            /* Hide the wordmark typeset on mobile (Salut Games) — will move to caption area */
+            div[style*="font-size: 64px"][style*="text-transform: uppercase"] {
+                font-size: 32px !important;
+                text-align: center !important;
+            }
+
+            /* Salut Games anatomy logo — height-based */
+            img[alt*="primary mark, isolated"] {
+                height: auto !important;
+                max-height: 360px !important;
+                width: auto !important;
+                max-width: 100% !important;
+            }
+
+            /* Mockup tag — smaller on mobile */
+            .mockup-tag { font-size: 6px !important; padding: 2px 5px !important; }
+        }
+
+        @media (max-width: 480px) {
+            /* Even tighter for narrow phones */
+            .section { padding: 18px 14px 28px; }
+            .case-content { padding: 0 14px; }
+            #index p[style*="font-size: 120px"] { font-size: 40px !important; }
+            .case-title { font-size: 36px; }
+            .ch-title { font-size: 28px !important; }
+            h1[style*="font-size: 96px"] { font-size: 36px !important; }
+            h3[style*="font-size: 52px"] { font-size: 26px !important; }
+            h3[style*="font-size: 52px"] + div { font-size: 26px !important; }
+            .nav { padding: 12px 14px !important; }
+            .mark { font-size: 12px !important; }
+            .nav-links { gap: 10px !important; }
+            .nav-link { font-size: 10px !important; }
+            .proj-row .proj-name { font-size: 18px !important; }
+        }
+
+        /* ===== INTERACTION POLISH — hover / focus / active across all buttons & links ===== */
+        /* Suppress mobile tap-highlight rectangle */
+        button, a { -webkit-tap-highlight-color: transparent; }
+
+        /* Default cursor + smooth color transitions on every interactive element */
+        button { cursor: pointer; transition: color 180ms ease, background 220ms ease, padding-left 220ms ease; }
+        a { transition: color 180ms ease, opacity 180ms ease, text-decoration-color 180ms ease; }
+
+        /* Keyboard-only focus outline (cream halo, not visible on mouse click) */
+        button:focus, a:focus { outline: none; }
+        button:focus-visible, a:focus-visible {
+            outline: 1.5px solid rgba(232, 230, 224, 0.55);
+            outline-offset: 4px;
+            border-radius: 2px;
+        }
+
+        /* "Pau Morató" mark in nav — hover state was missing */
+        .mark:hover { color: #C8C5BC; }
+        .mark:active { color: #9A9890; }
+
+        /* Nav-link press feedback */
+        .nav-link:active { color: #C8C5BC; }
+
+        /* Contact section anchor links — brighten + subtle underline on hover */
+        #contact a:hover {
+            color: #F2F0EA !important;
+            text-decoration: underline;
+            text-decoration-color: rgba(232, 230, 224, 0.4);
+            text-decoration-thickness: 0.5px;
+            text-underline-offset: 4px;
+        }
+
+        /* About contact-bar links — brighten on hover */
+        .contact-email:hover, .contact-socials a:hover { color: #F2F0EA !important; }
+
+        /* Inline external links inside case studies (@bcnsalutgames in Salut Games narrative, etc.) */
+        .case-main a[target="_blank"]:hover { opacity: 0.75; text-decoration: underline; text-decoration-thickness: 0.5px; text-underline-offset: 3px; }
+
+        /* Project row press feedback — subtle bg darken when actively clicking */
+        .proj-row:active { background: rgba(232, 230, 224, 0.05); }
+
+        /* TOC item press feedback */
+        .toc-item:active { color: #F2F0EA; }
+        /* Scroll-triggered reveal — quiet fade-up as content enters view */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 720ms cubic-bezier(0.2, 0.6, 0.2, 1),
+                        transform 720ms cubic-bezier(0.2, 0.6, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Terminal caret in URL bar — always blinking */
+        .url-caret {
+            display: inline-block;
+            width: 6px;
+            height: 11px;
+            background: #F2F0EA;
+            margin-left: 3px;
+            vertical-align: -1px;
+            animation: caretBlink 1.05s steps(1, end) infinite;
+        }
+        @keyframes caretBlink {
+            0%, 49%   { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Live status dot in sidebar foot — slow ceremonial pulse */
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #C8A555;
+            margin-right: 7px;
+            vertical-align: 1px;
+            animation: livePulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            50%      { opacity: 1;    transform: scale(1.2); }
+        }
+
+        /* Index project arrows — staggered pendulum wave */
+        .proj-row .arr {
+            display: inline-block;
+            animation: arrowDrift 2.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+        .proj-row:nth-of-type(1) .arr { animation-delay: 0s; }
+        .proj-row:nth-of-type(2) .arr { animation-delay: 0.18s; }
+        .proj-row:nth-of-type(3) .arr { animation-delay: 0.36s; }
+        .proj-row:nth-of-type(4) .arr { animation-delay: 0.54s; }
+        @keyframes arrowDrift {
+            0%, 100% { transform: translateX(0); }
+            25%      { transform: translateX(6px); }
+            75%      { transform: translateX(-3px); }
+        }
+        /* The hover state should win over the loop */
+        .proj-row:hover .arr { animation: none; transform: translateX(4px); transition: transform 220ms ease; }
+
+        /* Index watermark — analog flicker / jitter / horizontal tear */
+        .idx-watermark {
+            animation:
+                wmFlicker 8.9s steps(60) infinite,
+                wmJitter 1.7s steps(10) infinite,
+                wmTear 9.7s steps(100) infinite;
+        }
+        @keyframes wmFlicker {
+            0%, 100% { opacity: 1; }
+            6%  { opacity: 0.40; }
+            7%  { opacity: 1; }
+            13% { opacity: 0.85; }
+            14% { opacity: 1; }
+            22% { opacity: 0.25; }
+            23% { opacity: 1; }
+            34% { opacity: 0.95; }
+            37% { opacity: 1; }
+            41% { opacity: 0.45; }
+            47% { opacity: 1; }
+            58% { opacity: 0.70; }
+            63% { opacity: 1; }
+            65% { opacity: 0.50; }
+            66% { opacity: 1; }
+            77% { opacity: 0.95; }
+            79% { opacity: 0.35; }
+            81% { opacity: 1; }
+            93% { opacity: 0.85; }
+        }
+        @keyframes wmJitter {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-1px, 0); }
+            20% { transform: translate(1px, -1px); }
+            30% { transform: translate(0, 1px); }
+            40% { transform: translate(-2px, 0); }
+            50% { transform: translate(1px, 0); }
+            60% { transform: translate(0, 1px); }
+            70% { transform: translate(-1px, -1px); }
+            80% { transform: translate(2px, 0); }
+            90% { transform: translate(0, 0); }
+        }
+        @keyframes wmTear {
+            0%, 100% { text-shadow: none; }
+            9%  { text-shadow: 2px 0 rgba(232,230,224,0.05), -2px 0 rgba(210,225,200,0.04); }
+            10% { text-shadow: none; }
+            33% { text-shadow: -3px 0 rgba(232,230,224,0.06), 3px 0 rgba(210,225,200,0.04); }
+            34% { text-shadow: none; }
+            47% { text-shadow: 1px 0 rgba(232,230,224,0.07), -1px 0 rgba(210,225,200,0.05); }
+            48% { text-shadow: none; }
+            71% { text-shadow: 4px 0 rgba(232,230,224,0.05), -4px 0 rgba(210,225,200,0.04); }
+            72% { text-shadow: none; }
+            85% { text-shadow: 2px 0 rgba(232,230,224,0.06), -2px 0 rgba(210,225,200,0.04); }
+            86% { text-shadow: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .url-caret, .live-dot, .proj-row .arr, .idx-watermark { animation: none !important; }
+        }
+
+        /* Mockup-disclaimer badge — corner tag for rendered/mocked imagery, low-key */
+        .mockup-tag {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            z-index: 2;
+            font-family: 'Monaco','Menlo',monospace;
+            font-size: 7px;
+            color: rgba(232,230,224,0.55);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.28);
+            padding: 3px 6px;
+            border-radius: 1px;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -279,16 +639,16 @@
             <span class="dot dot-red"></span>
             <span class="dot dot-yellow"></span>
             <span class="dot dot-green"></span>
-            <span class="url">paumorato.com<b id="url-path">/</b></span>
+            <span class="url">paumorato.com<b id="url-path">/</b><span class="url-caret"></span></span>
         </div>
 
         <div class="main-scroll" id="main-scroll">
             <div class="nav">
-                <button class="mark" onclick="scrollTo('index')">Pau Morató</button>
+                <button class="mark" onclick="goToSection('index')">Pau Morató</button>
                 <div class="nav-links">
-                    <button class="nav-link" onclick="scrollTo('index')">Index</button>
-                    <button class="nav-link" onclick="scrollTo('about')">About</button>
-                    <button class="nav-link" onclick="alert('Contact: hello@paumorato.com')">Contact ↗</button>
+                    <button class="nav-link" onclick="goToSection('index')">Index</button>
+                    <button class="nav-link" onclick="goToSection('about')">About</button>
+                    <button class="nav-link" onclick="goToSection('contact')">Contact ↗</button>
                 </div>
             </div>
 
@@ -297,7 +657,7 @@
                 <!-- Impact statement -->
                 <div style="padding: 80px 0 60px; position: relative; overflow: hidden;">
                     <!-- "Design that holds its ground" large and faded behind -->
-                    <p style="font-family: 'Times New Roman', Georgia, serif; color: rgba(232,230,224,0.08); line-height: 1; letter-spacing: -0.04em; font-weight: 400; margin: 0; position: absolute; top: 40px; left: -44px; right: -44px; pointer-events: none; white-space: nowrap; font-size: 9.8vw;">Design that holds its ground.</p>
+                    <p class="idx-watermark" style="font-family: 'Times New Roman', Georgia, serif; color: rgba(232,230,224,0.08); line-height: 0.85; letter-spacing: -0.04em; font-weight: 400; margin: 0; position: absolute; top: 8px; left: 0; right: -44px; pointer-events: none; white-space: nowrap; font-size: 5vw;">Design that holds its ground.</p>
                     <!-- Name on top -->
                     <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 120px; color: #F2F0EA; line-height: 0.95; letter-spacing: -0.04em; font-weight: 400; margin: 0; position: relative; z-index: 2;">Pau Morató</p>
                     <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; padding-top: 12px; border-top: 0.5px solid rgba(232,230,224,0.12); position: relative; z-index: 2;">
@@ -308,43 +668,36 @@
                 <div class="idx-header">
                     <span>No.</span><span>Project</span><span>Category</span><span>Year</span><span></span>
                 </div>
-                <button class="proj-row" onclick="scrollTo('komando')">
+                <button class="proj-row" onclick="goToSection('komando')">
                     <span class="proj-num">01</span>
                     <span class="proj-name"><span class="dot-mark" style="background: #F2F0EA;"></span>Kømandø</span>
                     <span class="proj-tag">Identity · Event</span>
                     <span class="proj-year">2026</span>
                     <span class="arr">→</span>
                 </button>
-                <button class="proj-row" onclick="scrollTo('presskits')">
+                <button class="proj-row" onclick="goToSection('presskits')">
                     <span class="proj-num">02</span>
                     <span class="proj-name"><span class="dot-mark" style="background: #C8A555;"></span>Presskits</span>
                     <span class="proj-tag">Document · System</span>
-                    <span class="proj-year">2024—25</span>
+                    <span class="proj-year">2024—26</span>
                     <span class="arr">→</span>
                 </button>
-                <button class="proj-row" onclick="scrollTo('linkedin')">
+                <button class="proj-row" onclick="goToSection('linkedin')">
                     <span class="proj-num">03</span>
                     <span class="proj-name"><span class="dot-mark" style="background: #1B3A5C;"></span>LinkedIn system</span>
                     <span class="proj-tag">Content · B2B</span>
-                    <span class="proj-year">2024—</span>
+                    <span class="proj-year">2025—</span>
                     <span class="arr">→</span>
                 </button>
-                <button class="proj-row" onclick="scrollTo('brand')">
+                <button class="proj-row" onclick="goToSection('marks')">
                     <span class="proj-num">04</span>
-                    <span class="proj-name"><span class="dot-mark" style="background: #D85A30;"></span>Brand identity</span>
-                    <span class="proj-tag">Identity · Creative</span>
-                    <span class="proj-year">2024</span>
-                    <span class="arr">→</span>
-                </button>
-                <button class="proj-row" onclick="scrollTo('marks')">
-                    <span class="proj-num">05</span>
                     <span class="proj-name"><span class="dot-mark" style="background: #5A5954;"></span>Marks</span>
                     <span class="proj-tag">Logos · Selected</span>
-                    <span class="proj-year">2024—25</span>
+                    <span class="proj-year">2020—23</span>
                     <span class="arr">→</span>
                 </button>
                 <div class="foot">
-                    <span>Barcelona · ES</span><span>05 / 05</span><span>INDEX · 2026</span>
+                    <span><span class="live-dot"></span>Barcelona · ES</span><span>04 / 04</span><span>INDEX · 2026</span>
                 </div>
             </section>
 
@@ -385,9 +738,23 @@
                                 <div class="svc-item"><div class="svc-num">III.</div><div class="svc-name">Event &amp; culture</div><div class="svc-desc">Flyers · posters · promo · motion</div></div>
                             </div>
                         </div>
+
+                        <!-- Tools / software -->
+                        <div style="margin-top: 28px; padding-top: 14px; border-top: 0.5px solid rgba(232,230,224,0.15);">
+                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 8px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Tools</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px 18px;">
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Figma</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Adobe</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Canva</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">AI tools</span>
+                            </div>
+                        </div>
                         <div class="contact-bar">
-                            <div class="contact-email">hello@paumorato.com</div>
-                            <div class="contact-socials"><span>LinkedIn ↗</span><span>Instagram ↗</span></div>
+                            <a href="mailto:paumoratodesign@gmail.com" class="contact-email" style="color: inherit; text-decoration: none;">paumoratodesign@gmail.com</a>
+                            <div class="contact-socials"><a href="https://www.linkedin.com/in/pau-morat%C3%B3-sebasti%C3%A0-5554a01b2/" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">LinkedIn ↗</a></div>
                         </div>
                     </div>
 
@@ -405,12 +772,21 @@
                     <div class="case-grid">
                         <div class="toc-sticky">
                             <div class="toc-header">Chapters · 06</div>
-                            <button class="toc-item active" data-anchor="k-ch01" onclick="scrollTo('k-ch01')"><span class="toc-num">01</span><span class="toc-name">Intro</span></button>
-                            <button class="toc-item" data-anchor="k-ch02" onclick="scrollTo('k-ch02')"><span class="toc-num">02</span><span class="toc-name">Direction</span></button>
-                            <button class="toc-item" data-anchor="k-ch03" onclick="scrollTo('k-ch03')"><span class="toc-num">03</span><span class="toc-name">Identity</span></button>
-                            <button class="toc-item" data-anchor="k-ch04" onclick="scrollTo('k-ch04')"><span class="toc-num">04</span><span class="toc-name">Flyers</span></button>
-                            <button class="toc-item" data-anchor="k-ch05" onclick="scrollTo('k-ch05')"><span class="toc-num">05</span><span class="toc-name">Motion · merch</span></button>
-                            <button class="toc-item" data-anchor="k-ch06" onclick="scrollTo('k-ch06')"><span class="toc-num">06</span><span class="toc-name">In context</span></button>
+                            <button class="toc-item active" data-anchor="k-ch01" onclick="goToSection('k-ch01')"><span class="toc-num">01</span><span class="toc-name">Intro</span></button>
+                            <button class="toc-item" data-anchor="k-ch02" onclick="goToSection('k-ch02')"><span class="toc-num">02</span><span class="toc-name">Direction</span></button>
+                            <button class="toc-item" data-anchor="k-ch03" onclick="goToSection('k-ch03')"><span class="toc-num">03</span><span class="toc-name">Identity</span></button>
+                            <button class="toc-item" data-anchor="k-ch04" onclick="goToSection('k-ch04')"><span class="toc-num">04</span><span class="toc-name">Flyers</span></button>
+                            <button class="toc-item" data-anchor="k-ch05" onclick="goToSection('k-ch05')"><span class="toc-num">05</span><span class="toc-name">Motion · merch</span></button>
+                            <button class="toc-item" data-anchor="k-ch06" onclick="goToSection('k-ch06')"><span class="toc-num">06</span><span class="toc-name">In context</span></button>
+
+                            <!-- Jump to other case studies -->
+                            <div class="toc-other-section">
+                                <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other toc-back" onclick="goToSection('index')"><span>↑ All work</span></button>
+                            </div>
                         </div>
                         <div class="case-main">
                             <div class="case-header">
@@ -422,6 +798,7 @@
                                 </div>
                             </div>
                             <p class="case-desc">A new Barcelona collective promoting industrial electronic events. Complete brand system from logo to event collateral — designed for their inaugural event and ongoing identity.</p>
+                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; color: #9A9890; max-width: 680px; margin: -32px 0 56px;">The brief was an event identity for an underground electronic night &mdash; something atmospheric enough to belong to the scene, structured enough to scale from flyers through motion to live signage. The constraint was a single accent &mdash; the metallic fragment mark &mdash; that had to hold at every size and survive formats it was never originally designed for. The tradeoff: I leaned hard into industrial restraint over decoration, trusting that one strong mark held with discipline would do more than a dozen variations.</p>
 
                             <section class="chapter" id="k-ch01">
                                 <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 06</span><span class="ch-pagelabel">Intro</span></div>
@@ -750,20 +1127,30 @@
                     <div class="case-grid">
                         <div class="toc-sticky">
                             <div class="toc-header">Chapters · 03</div>
-                            <button class="toc-item active" data-anchor="p-ch01" onclick="scrollTo('p-ch01')"><span class="toc-num">01</span><span class="toc-name">The service</span></button>
-                            <button class="toc-item" data-anchor="p-ch02" onclick="scrollTo('p-ch02')"><span class="toc-num">02</span><span class="toc-name">The system</span></button>
-                            <button class="toc-item" data-anchor="p-ch03" onclick="scrollTo('p-ch03')"><span class="toc-num">03</span><span class="toc-name">The three</span></button>
+                            <button class="toc-item active" data-anchor="p-ch01" onclick="goToSection('p-ch01')"><span class="toc-num">01</span><span class="toc-name">The service</span></button>
+                            <button class="toc-item" data-anchor="p-ch02" onclick="goToSection('p-ch02')"><span class="toc-num">02</span><span class="toc-name">The system</span></button>
+                            <button class="toc-item" data-anchor="p-ch03" onclick="goToSection('p-ch03')"><span class="toc-num">03</span><span class="toc-name">The three</span></button>
+
+                            <!-- Jump to other case studies -->
+                            <div class="toc-other-section">
+                                <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other toc-back" onclick="goToSection('index')"><span>↑ All work</span></button>
+                            </div>
                         </div>
                         <div class="case-main">
                             <div class="case-header">
                                 <h1 class="case-title">Presskits</h1>
                                 <div class="case-meta">
-                                    <span><b>Year</b> 2024—25</span><br>
+                                    <span><b>Year</b> 2024—26</span><br>
                                     <span><b>Scope</b> System · 03 artists</span><br>
                                     <span><b>Chapters</b> 03</span>
                                 </div>
                             </div>
                             <p class="case-desc">Presskits for electronic artists. One repeatable system, tuned per artist.</p>
+                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; color: #9A9890; max-width: 680px; margin: -32px 0 56px;">Three artists, three different sounds, one workable system &mdash; a presskit format reusable per artist without going template-y. The constraint was that deliverables had to be both print-quality (A4, exportable) and a live document, with clickable links to SoundCloud, Bandcamp, Instagram. The tradeoff: I fixed everything &mdash; grid, type, page architecture &mdash; except one variable, the accent colour, so each artist still feels distinct without breaking the system.</p>
 
                             <!-- CHAPTER 01 — THE SERVICE -->
                             <section class="chapter" id="p-ch01">
@@ -780,7 +1167,7 @@
                                             <div class="s1-stat">
                                                 <div class="s1-stat-label">Artists</div>
                                                 <div class="s1-stat-num">03</div>
-                                                <div class="s1-stat-sub">Barcelona · 2024—25</div>
+                                                <div class="s1-stat-sub">Barcelona · 2024—26</div>
                                             </div>
                                             <div class="s1-stat">
                                                 <div class="s1-stat-label">Pages each</div>
@@ -1034,23 +1421,35 @@
                 <div class="case-content" style="padding: 0;">
                     <div class="case-grid">
                         <div class="toc-sticky">
-                            <div class="toc-header">Chapters · 02</div>
-                            <button class="toc-item active" data-anchor="l-ch01" onclick="scrollTo('l-ch01')"><span class="toc-num">01</span><span class="toc-name">The system</span></button>
-                            <button class="toc-item" data-anchor="l-ch02" onclick="scrollTo('l-ch02')"><span class="toc-num">02</span><span class="toc-name">In production</span></button>
+                            <div class="toc-header">Chapters · 04</div>
+                            <button class="toc-item active" data-anchor="l-ch01" onclick="goToSection('l-ch01')"><span class="toc-num">01</span><span class="toc-name">The system</span></button>
+                            <button class="toc-item" data-anchor="l-ch02" onclick="goToSection('l-ch02')"><span class="toc-num">02</span><span class="toc-name">Frameworks</span></button>
+                            <button class="toc-item" data-anchor="l-ch03" onclick="goToSection('l-ch03')"><span class="toc-num">03</span><span class="toc-name">Palette study</span></button>
+                            <button class="toc-item" data-anchor="l-ch04" onclick="goToSection('l-ch04')"><span class="toc-num">04</span><span class="toc-name">Stack</span></button>
+
+                            <!-- Jump to other case studies -->
+                            <div class="toc-other-section">
+                                <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other toc-back" onclick="goToSection('index')"><span>↑ All work</span></button>
+                            </div>
                         </div>
                         <div class="case-main">
                             <div class="case-header">
                                 <h1 class="case-title">LinkedIn</h1>
                                 <div class="case-meta">
-                                    <span><b>Year</b> 2024—</span><br>
+                                    <span><b>Year</b> 2025—</span><br>
                                     <span><b>Scope</b> Ongoing retainer</span><br>
-                                    <span><b>Chapters</b> 02</span>
+                                    <span><b>Chapters</b> 04</span>
                                 </div>
                             </div>
                             <p class="case-desc">Single-post system for two GTM executives. Same architecture, different voices.</p>
+                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; color: #9A9890; max-width: 680px; margin: -32px 0 56px;">A content design system for cold-outbound B2B founders &mdash; posts that don't look like junior-marketer work, with frameworks that scale across topics. The constraint was that LinkedIn's feed punishes anything visually loud, and the audience scrolls fast. The tradeoff: a small kit of strict templates (the 1% framework, the pyramid, the dark Tech Stack), with palette doing the variety, so a single post is unmistakable and a series builds recognition.</p>
 
                             <section class="chapter" id="l-ch01">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 02</span><span class="ch-pagelabel">The system</span></div>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 04</span><span class="ch-pagelabel">The system</span></div>
                                 <h2 class="ch-title">The system</h2>
                                 <div class="ch-body">
                                     <div class="ch-prose">
@@ -1058,25 +1457,78 @@
                                         <p>Two executives at one GTM company. One template, two color systems. Weekly production cadence, ongoing.</p>
                                         <p>The client arrived with a brand framework. I rebuilt the design identity for LinkedIn.</p>
                                     </div>
-                                    <div class="ch-placeholder">
-                                        <span class="ch-placeholder-label">FIG. 01.I · Exec A post</span>
-                                        <span class="ch-placeholder-center"><em>Blue system</em></span>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 10px; display: block;">FIG. 01.I · 2026 GTM Tech Stack</span>
+                                        <img src="PORTFOLIO_ASSETS/2026%20GTM%20Tech%20Stack-1.png" alt="2026 GTM Tech Stack — purple variant" style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
                                     </div>
                                 </div>
                             </section>
 
                             <section class="chapter" id="l-ch02">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 02</span><span class="ch-pagelabel">In production</span></div>
-                                <h2 class="ch-title">In production</h2>
-                                <div class="ch-body">
-                                    <div class="ch-prose">
-                                        <p><em>Six posts · anonymized.</em></p>
-                                        <p>Three per executive, across frameworks, data, and quotes. The system flexes but stays legible as one practice.</p>
-                                        <p>Limited to two retainers per quarter.</p>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 04</span><span class="ch-pagelabel">Frameworks</span></div>
+                                <h2 class="ch-title">Frameworks</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
+                                    <p><em>Strategy, distilled to one image.</em></p>
+                                    <p>Long-form thinking compressed into single posts. Each is a self-contained argument — a system, a framework, a stack.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.I · 1-person GTM system</span>
+                                        <img src="PORTFOLIO_ASSETS/PYRAMID%20DESIGN.png" alt="The 1-person GTM system" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
                                     </div>
-                                    <div class="ch-placeholder">
-                                        <span class="ch-placeholder-label">FIG. 02.I · Grid</span>
-                                        <span class="ch-placeholder-center"><em>Posts · 06</em></span>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.II · 1% cold email framework</span>
+                                        <img src="PORTFOLIO_ASSETS/Jan%20The%201%25%20cold%20email%20framework.png" alt="The 1% cold email framework" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.III · Tech stack · dark</span>
+                                        <img src="PORTFOLIO_ASSETS/2026%20GTM%20Tech%20Stack.png" alt="2026 GTM Tech Stack — dark variant" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="l-ch03">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 03 of 04</span><span class="ch-pagelabel">Palette study</span></div>
+                                <h2 class="ch-title">Palette study</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
+                                    <p><em>Same post. Three palettes.</em></p>
+                                    <p>Scaling Traffic Generation, rendered three times. The system flexes for tone — charcoal, navy, brighter blue — without breaking character.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.I · Charcoal</span>
+                                        <img src="PORTFOLIO_ASSETS/LINKEDIN%20POST.png" alt="Scaling Traffic Generation — charcoal" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.II · Navy</span>
+                                        <img src="PORTFOLIO_ASSETS/Scaling%20Traffic%20Generation%202027.png" alt="Scaling Traffic Generation — navy" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.III · Blue</span>
+                                        <img src="PORTFOLIO_ASSETS/Scaling%20Traffic%20Generation%202028.png" alt="Scaling Traffic Generation — blue" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="l-ch04">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 04 of 04</span><span class="ch-pagelabel">Stack</span></div>
+                                <h2 class="ch-title">Stack</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
+                                    <p><em>Tools, made visible.</em></p>
+                                    <p>A recurring series — each post pairs a tool with Claude. Same template, purple palette, weekly cadence.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 04.I · Apollo + Claude</span>
+                                        <img src="PORTFOLIO_ASSETS/APOLLO%2BCLAUDE%28purple%29.png" alt="Apollo plus Claude" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 04.II · Clay + Claude</span>
+                                        <img src="PORTFOLIO_ASSETS/CLAY%2BCLAUDE%28purple%29.png" alt="Clay plus Claude" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 04.III · Instantly + Claude</span>
+                                        <img src="PORTFOLIO_ASSETS/INSTANTLY%2BCLAUDE%28purple%29.png" alt="Instantly plus Claude" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
                                     </div>
                                 </div>
                             </section>
@@ -1085,82 +1537,354 @@
                 </div>
             </section>
 
-            <!-- BRAND IDENTITY CASE STUDY -->
-            <section class="section" id="brand">
+            <!-- MARKS CASE STUDY -->
+            <section class="section" id="marks">
                 <div class="case-content" style="padding: 0;">
                     <div class="case-grid">
                         <div class="toc-sticky">
-                            <div class="toc-header">Chapters · 04 · pending</div>
-                            <button class="toc-item active" data-anchor="b-ch01" onclick="scrollTo('b-ch01')"><span class="toc-num">01</span><span class="toc-name">Intro</span></button>
-                            <button class="toc-item" data-anchor="b-ch02" onclick="scrollTo('b-ch02')"><span class="toc-num">02</span><span class="toc-name">Direction</span></button>
-                            <button class="toc-item" data-anchor="b-ch03" onclick="scrollTo('b-ch03')"><span class="toc-num">03</span><span class="toc-name">Identity</span></button>
-                            <button class="toc-item" data-anchor="b-ch04" onclick="scrollTo('b-ch04')"><span class="toc-num">04</span><span class="toc-name">In context</span></button>
+                            <div class="toc-header">Chapters · 02</div>
+                            <button class="toc-item active" data-anchor="m-ch01" onclick="goToSection('m-ch01')"><span class="toc-num">01</span><span class="toc-name">AEPLMV</span></button>
+                            <button class="toc-item" data-anchor="m-ch02" onclick="goToSection('m-ch02')"><span class="toc-num">02</span><span class="toc-name">Salut Games</span></button>
+
+                            <!-- Jump to other case studies -->
+                            <div class="toc-other-section">
+                                <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other toc-back" onclick="goToSection('index')"><span>↑ All work</span></button>
+                            </div>
                         </div>
                         <div class="case-main">
                             <div class="case-header">
-                                <h1 class="case-title">Brand identity</h1>
+                                <h1 class="case-title">Marks</h1>
                                 <div class="case-meta">
-                                    <span><b>Year</b> 2024</span><br>
-                                    <span><b>Scope</b> Full identity</span><br>
-                                    <span><b>Chapters</b> 04 · pending</span>
+                                    <span><b>Year</b> 2020—23</span><br>
+                                    <span><b>Scope</b> Selected · 02 marks</span><br>
+                                    <span><b>Chapters</b> 02</span>
                                 </div>
                             </div>
-                            <p class="case-desc">A creative project — concept, identity, system, applications. To be designed.</p>
+                            <p class="case-desc">Two marks shipped, two different worlds. One paid commission for a Catalan business association; one live brand for a hospital workers' Olympic event, running at @bcnsalutgames.</p>
 
-                            <section class="chapter" id="b-ch01">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 04</span><span class="ch-pagelabel">Intro</span></div>
-                                <h2 class="ch-title">Intro</h2>
-                                <div class="ch-body">
-                                    <div class="ch-prose"><p style="color: #5A5954;">Not yet designed. Placeholder for scroll.</p></div>
-                                    <div class="ch-placeholder"><span class="ch-placeholder-center"><em>Pending</em></span></div>
+                            <!-- CHAPTER 01 — AEPLMV -->
+                            <section class="chapter" id="m-ch01">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 02</span><span class="ch-pagelabel">AEPLMV</span></div>
+                                <h2 class="ch-title">AEPLMV</h2>
+
+                                <!-- Tagline pull-quote -->
+                                <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 28px; line-height: 1.2; font-style: italic; letter-spacing: -0.01em; margin: 8px 0 24px; max-width: 720px;">
+                                    <span style="color: #2A8E3F;">Sustainable spaces.</span> <span style="color: #C8C5BC;">Stronger futures.</span>
+                                </p>
+
+                                <!-- Brand context + narrative -->
+                                <p style="color: #9A9890; font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; max-width: 680px; margin: 0 0 28px;">
+                                    A visual identity for the <em>Associació d'Empresaris/es i Propietaris/es dels Polígons d'Activitat Econòmica de Manlleu i les Masies de Voltregà</em> &mdash; a regional Catalan business association of industrial polígons, commissioned and paid. Usually this brief ends in a corporate sans and a glass-and-steel render. The constraint was that the association's pitch is sustainability, but the audience is small-town business owners &mdash; modern, not techy; civic, not bureaucratic. The tradeoff: I rendered the polígons as living things &mdash; buildings with leaves growing through them &mdash; pushing toward eco-architecture and away from generic local-government work.
+                                </p>
+
+                                <!-- Fact panel — region / towns / partners / year -->
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 18px 0; border-top: 0.5px solid rgba(232,230,224,0.14); border-bottom: 0.5px solid rgba(232,230,224,0.14); margin-bottom: 56px;">
+                                    <div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Region</div>
+                                        <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; line-height: 1.3;">Osona, Catalonia</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Towns</div>
+                                        <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; line-height: 1.3;">Manlleu &middot; Les Masies de Voltregà</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Partners</div>
+                                        <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; line-height: 1.3;">Local councils</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">Year</div>
+                                        <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; line-height: 1.3;">2023</div>
+                                    </div>
+                                </div>
+
+                                <!-- PHASE 01 · ORIGIN -->
+                                <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Phase 01</span>
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">Origin · From the notebook</span>
+                                </div>
+                                <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; margin-bottom: 8px;">
+                                    <img src="PORTFOLIO_ASSETS/SKETCH.png" alt="AEPLMV sketchbook ideation" style="width: 100%; display: block;">
+                                </div>
+                                <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 56px;">Fig. 01.I · Sketchbook · ideation phase</div>
+
+                                <!-- PHASE 02 · MARK -->
+                                <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Phase 02</span>
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">Mark · Three directions, isolated</span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; align-items: center; padding: 24px 0; margin-bottom: 8px;">
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <img src="PORTFOLIO_ASSETS/IMG_1275 1.png" alt="AEPLMV — verticals direction" style="width: 100%; max-width: 360px; display: block;">
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: -8px;">Direction A</div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;">Verticals</div>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <img src="PORTFOLIO_ASSETS/IMG_1276 1.png" alt="AEPLMV — hillscape direction" style="width: 100%; max-width: 360px; display: block;">
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: -8px;">Direction B</div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;">Hillscape</div>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <img src="PORTFOLIO_ASSETS/IMG_1277 1.png" alt="AEPLMV — skyline direction" style="width: 100%; max-width: 360px; display: block;">
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-top: -8px;">Direction C</div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px;">Skyline</div>
+                                    </div>
+                                </div>
+                                <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; margin-bottom: 56px;">Fig. 01.II · Three final candidates &middot; cream halos dissolving into the page</div>
+
+                                <!-- PHASE 03 · SYSTEM -->
+                                <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Phase 03</span>
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">System · The full identity</span>
+                                </div>
+                                <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                                    <span class="mockup-tag">Mock-up &middot; not real</span>
+                                    <img src="PORTFOLIO_ASSETS/MOCK UP 3.png" alt="AEPLMV brand identity overview — stationery, signage, guidelines" style="width: 100%; display: block;">
+                                </div>
+                                <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 56px;">Fig. 01.III · Brand book &middot; logotype, palette, typography, applications</div>
+
+                                <!-- PHASE 04 · IN CONTEXT -->
+                                <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Phase 04</span>
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">In context · Applied</span>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                                    <div>
+                                        <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative;">
+                                            <span class="mockup-tag">Mock-up &middot; not real</span>
+                                            <img src="PORTFOLIO_ASSETS/MOCKUP 1.png" alt="AEPLMV interior signage and brochure" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase;">Interior &middot; reception</div>
+                                    </div>
+                                    <div>
+                                        <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative;">
+                                            <span class="mockup-tag">Mock-up &middot; not real</span>
+                                            <img src="PORTFOLIO_ASSETS/MOCK UP 4.png" alt="AEPLMV stationery and digital application" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase;">Stationery &middot; digital</div>
+                                    </div>
+                                    <div>
+                                        <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative;">
+                                            <span class="mockup-tag">Mock-up &middot; not real</span>
+                                            <img src="PORTFOLIO_ASSETS/MOCK UP 5.png" alt="AEPLMV eco-urban applications board" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase;">Eco-urban &middot; merchandise</div>
+                                    </div>
+                                </div>
+                                <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 56px;">Fig. 01.IV · From reception desk to tote bag</div>
+
+                                <!-- HERO · the building -->
+                                <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Closing</span>
+                                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">At building scale</span>
+                                </div>
+                                <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; margin-bottom: 16px; position: relative;">
+                                    <span class="mockup-tag">Mock-up &middot; not real</span>
+                                    <img src="PORTFOLIO_ASSETS/MOCK UP 2.png" alt="AEPLMV — the green building exterior" style="width: 100%; display: block;">
+                                </div>
+                                <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 28px; line-height: 1.2; font-style: italic; letter-spacing: -0.01em; margin: 8px 0 0; text-align: center;">
+                                    <span style="color: #C8C5BC;">Building today.</span> <span style="color: #2A8E3F;">Inspiring tomorrow.</span>
+                                </p>
+                            </section>
+
+                            <!-- CHAPTER 02 — SALUTE GAMES -->
+                            <section class="chapter" id="m-ch02">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 02</span><span class="ch-pagelabel">Salut Games</span></div>
+                                <h2 class="ch-title">Salut Games</h2>
+                                <div style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.12em; text-transform: uppercase; margin: 4px 0 8px;">Year &middot; <span style="color: #E8E6E0;">2020</span> &middot; live brand</div>
+
+                                <!-- Logo case study section (Komando-style Identity treatment) -->
+                                <div style="background: #0A0A0C; color: #E8E6E0; border-radius: 4px; padding: 48px 56px 64px; position: relative; overflow: hidden; margin: 40px 0;">
+
+                                    <!-- Header -->
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                                        <h3 style="font-family: 'Times New Roman', serif; font-size: 52px; line-height: 1; color: #F2F0EA; font-weight: 400; letter-spacing: -0.02em; margin: 0;">Logo Design</h3>
+                                        <div style="font-family: 'Times New Roman', serif; font-size: 52px; line-height: 1; color: #F2F0EA; font-weight: 400; letter-spacing: -0.02em;">02</div>
+                                    </div>
+
+                                    <!-- Table of contents -->
+                                    <div style="display: grid; grid-template-columns: 60px 1fr; row-gap: 3px; column-gap: 12px; font-family: ui-monospace, monospace; font-size: 10px; max-width: 280px; margin-top: 18px; padding-top: 8px; border-top: 0.5px solid rgba(232,230,224,0.15);">
+                                        <span style="color: #6B6A64; letter-spacing: 0.04em;">no.</span><span style="color: #6B6A64; letter-spacing: 0.04em;">category:</span>
+                                        <span style="color: #9A9890;">02.I</span><span style="color: #E8E6E0;">Logo construction</span>
+                                        <span style="color: #9A9890;">02.II</span><span style="color: #6B6A64;">Color variants</span>
+                                        <span style="color: #9A9890;">02.III</span><span style="color: #6B6A64;">Logo sizes</span>
+                                        <span style="color: #9A9890;">02.IV</span><span style="color: #6B6A64;">Applications</span>
+                                    </div>
+
+                                    <!-- Main composition stage -->
+                                    <div style="position: relative; height: 780px; margin-top: 20px;">
+
+                                        <!-- Process image as large background layer -->
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 110%; z-index: 1; opacity: 0.18;">
+                                            <img src="PORTFOLIO_ASSETS/SKETCH FASE.png" alt="Logo process — pre-sketch to final" style="width: 100%; height: auto; border-radius: 2px;">
+                                        </div>
+                                        <!-- Process label -->
+                                        <span style="position: absolute; top: 0; right: 0; font-family: ui-monospace, monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; z-index: 3;">Source · Process · Pre-sketch → final</span>
+
+                                        <!-- Label A -->
+                                        <span style="position: absolute; top: 280px; left: 0; font-family: ui-monospace, monospace; font-size: 10px; color: #9A9890; letter-spacing: 0.04em; z-index: 3;"><b style="font-weight: 500; color: #6B6A64; margin-right: 10px;">A</b>Primary mark</span>
+
+                                        <!-- Main logo centered with corner markers -->
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; z-index: 4;">
+                                            <!-- Corner construction markers -->
+                                            <span style="position: absolute; top: -14px; left: -14px; width: 8px; height: 8px; border: 0.5px solid #5A5954;"></span>
+                                            <span style="position: absolute; top: -14px; right: -14px; width: 8px; height: 8px; border: 0.5px solid #5A5954;"></span>
+                                            <span style="position: absolute; bottom: -14px; left: -14px; width: 8px; height: 8px; border: 0.5px solid #5A5954;"></span>
+
+                                            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                                                <img src="PORTFOLIO_ASSETS/logo transparent.png" alt="Salut Games Logo" style="height: 760px; width: auto; filter: drop-shadow(0 0 50px rgba(0,0,0,0.7)) drop-shadow(0 0 120px rgba(0,0,0,0.5));">
+                                                <span style="position: absolute; top: 8px; right: -20px; font-family: ui-monospace, monospace; font-size: 9px; color: #F2F0EA;">™</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Label B -->
+                                        <span style="position: absolute; top: 620px; left: 0; font-family: ui-monospace, monospace; font-size: 10px; color: #9A9890; letter-spacing: 0.04em; z-index: 3;"><b style="font-weight: 500; color: #6B6A64; margin-right: 10px;">B</b>Wordmark</span>
+
+                                        <!-- Wordmark bottom right with corner markers (typeset) -->
+                                        <div style="position: absolute; bottom: 100px; right: 0; width: 480px; display: flex; align-items: center; justify-content: center; z-index: 4;">
+                                            <span style="position: absolute; top: -10px; left: -10px; width: 6px; height: 6px; border: 0.5px solid #5A5954;"></span>
+                                            <span style="position: absolute; top: -10px; right: -10px; width: 6px; height: 6px; border: 0.5px solid #5A5954;"></span>
+                                            <span style="position: absolute; bottom: -10px; right: -10px; width: 6px; height: 6px; border: 0.5px solid #5A5954;"></span>
+                                            <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 64px; line-height: 1; color: #F2F0EA; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; filter: drop-shadow(0 0 40px rgba(0,0,0,0.7));">Salut Games</div>
+                                        </div>
+
+                                        <!-- Caption bottom left -->
+                                        <div style="position: absolute; bottom: 0; left: 0; max-width: 240px; font-family: ui-monospace, monospace; font-size: 10px; color: #9A9890; line-height: 1.5;">
+                                            <b style="color: #E8E6E0; font-weight: 500; display: block; margin-bottom: 4px;">FIG. 02.I</b>
+                                            Mark built from one brushed gesture — running body and heart symbol. Black shadow + red body, always in motion.
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- ANATOMY · Why this mark -->
+                                <div style="margin: 64px 0 56px;">
+                                    <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px;">
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Anatomy</span>
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">Why this mark</span>
+                                    </div>
+
+                                    <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 22px; line-height: 1.35; color: #E8E6E0; max-width: 760px; margin: 0 0 16px; font-style: italic; letter-spacing: -0.005em;">
+                                        Salut Games is the Olympic Games for hospital workers &mdash; healthcare staff competing in athletic events. The mark has to hold both halves at once: <span style="color: #E63946;">the athlete on the track</span>, and <span style="color: #C8C5BC;">the worker in the ward</span>.
+                                    </p>
+                                    <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; line-height: 1.55; color: #9A9890; max-width: 680px; margin: 0 0 48px;">
+                                        The constraint was that healthcare brands skew sterile, sports brands skew aggressive &mdash; neither tone fit. The tradeoff: a single hand-painted brushstroke for the runner, paired with a hand-drawn heart-and-cross &mdash; texture instead of polish, gesture instead of geometry. Delivered for someone I knew, the mark went on to become the brand's working identity, now live at <a href="https://www.instagram.com/bcnsalutgames/" target="_blank" rel="noopener" style="color: #E63946; text-decoration: none;">@bcnsalutgames</a>.
+                                    </p>
+
+                                    <!-- Logo on page bg with bounded radial halo (no container, no clipping) -->
+                                    <div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 120px 40px 130px;">
+                                        <!-- Contained radial halo · cream lift + soft red atmosphere · closest-side fade -->
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; aspect-ratio: 1/1; max-width: 760px; background: radial-gradient(circle closest-side at center, rgba(232,230,224,0.24) 0%, rgba(232,230,224,0.13) 25%, rgba(230,57,70,0.07) 55%, rgba(230,57,70,0.02) 75%, transparent 90%); z-index: 0; pointer-events: none;"></div>
+                                        <!-- Logo · z-index above halo -->
+                                        <img src="PORTFOLIO_ASSETS/logo transparent.png" alt="Salut Games — primary mark, isolated" style="position: relative; z-index: 1; height: 540px; width: auto; filter: drop-shadow(0 0 14px rgba(0,0,0,0.45));">
+                                    </div>
+
+                                    <!-- Rationale grid · 3 columns -->
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; padding-top: 24px; border-top: 0.5px solid rgba(232,230,224,0.14);">
+                                        <div>
+                                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.1em; margin-bottom: 10px; font-weight: 700;">01 &middot; Two strokes</div>
+                                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 14px; line-height: 1.6; color: #9A9890; margin: 0;">Black shadow + red body. A runner mid-stride, motion compressed into one painted gesture. Red carries forward; black anchors behind. Speed and weight together &mdash; a pulse on the move.</p>
+                                        </div>
+                                        <div>
+                                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.1em; margin-bottom: 10px; font-weight: 700;">02 &middot; Brushed, not built</div>
+                                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 14px; line-height: 1.6; color: #9A9890; margin: 0;">Hand-painted, not vectorised. This is a brand for people who heal &mdash; texture beats precision. The roughness is the point: it reads as human, not corporate.</p>
+                                        </div>
+                                        <div>
+                                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.1em; margin-bottom: 10px; font-weight: 700;">03 &middot; Heart with a cross</div>
+                                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 14px; line-height: 1.6; color: #9A9890; margin: 0;">The small mark in the upper right is what pins it to healthcare. Without that heart-and-cross, this is just a sports logo. With it, the runner is unmistakably one of them.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- IN CONTEXT · Out in the world -->
+                                <div style="margin: 64px 0 24px;">
+                                    <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px;">
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">In context</span>
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">Out in the world</span>
+                                    </div>
+
+                                    <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; line-height: 1.55; color: #9A9890; max-width: 680px; margin: 0 0 40px;">
+                                        The mark is alive &mdash; BCN Salut Games runs it across an active Instagram presence and a proposed web identity. Real audience, real reach.
+                                    </p>
+
+                                    <!-- LIVE · @bcnsalutgames -->
+                                    <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #2A8E3F; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Live</span>
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">@bcnsalutgames &middot; 2.7k followers &middot; 3k posts</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                                        <div style="max-width: 520px; width: 100%; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 0.5px rgba(232,230,224,0.10);">
+                                            <img src="PORTFOLIO_ASSETS/instagram mock up.png" alt="@bcnsalutgames Instagram profile — live brand" style="width: 100%; display: block;">
+                                        </div>
+                                    </div>
+                                    <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; margin-bottom: 56px;">Fig. 02.II · @bcnsalutgames &middot; live profile &middot; <span style="color: #2A8E3F;">●</span> active</div>
+
+                                    <!-- WEB · Concept -->
+                                    <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #E63946; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Web</span>
+                                        <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase;">Concept &middot; proposed identity</span>
+                                    </div>
+                                    <div style="background: #F2F0EA; border-radius: 2px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                                        <span class="mockup-tag">Mock-up &middot; not real</span>
+                                        <img src="PORTFOLIO_ASSETS/web page.png" alt="Salut Games web concept — homepage" style="width: 100%; display: block;">
+                                    </div>
+                                    <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase;">Fig. 02.III · Web concept &middot; home, mission, events, donate</div>
                                 </div>
                             </section>
 
-                            <section class="chapter" id="b-ch02">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 04</span><span class="ch-pagelabel">Direction</span></div>
-                                <h2 class="ch-title">Direction</h2>
-                                <div class="ch-body">
-                                    <div class="ch-prose"><p style="color: #5A5954;">Not yet designed.</p></div>
-                                    <div class="ch-placeholder"><span class="ch-placeholder-center"><em>Pending</em></span></div>
-                                </div>
-                            </section>
-
-                            <section class="chapter" id="b-ch03">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 03 of 04</span><span class="ch-pagelabel">Identity</span></div>
-                                <h2 class="ch-title">Identity</h2>
-                                <div class="ch-body">
-                                    <div class="ch-prose"><p style="color: #5A5954;">Not yet designed.</p></div>
-                                    <div class="ch-placeholder"><span class="ch-placeholder-center"><em>Pending</em></span></div>
-                                </div>
-                            </section>
-
-                            <section class="chapter" id="b-ch04">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 04 of 04</span><span class="ch-pagelabel">In context</span></div>
-                                <h2 class="ch-title">In context</h2>
-                                <div class="ch-body">
-                                    <div class="ch-prose"><p style="color: #5A5954;">Not yet designed.</p></div>
-                                    <div class="ch-placeholder"><span class="ch-placeholder-center"><em>Pending</em></span></div>
-                                </div>
-                            </section>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- MARKS SECTION -->
-            <section class="section" id="marks">
-                <div class="case-header">
-                    <h1 class="case-title">Marks</h1>
-                    <div class="case-meta">
-                        <span><b>Year</b> 2024—25</span><br>
-                        <span><b>Scope</b> Selected · 2—3 marks</span><br>
-                        <span><b>Format</b> Gallery · one page</span>
+            <!-- CONTACT SECTION -->
+            <section class="section" id="contact">
+                <!-- Top kicker line -->
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 0.5px solid rgba(232,230,224,0.10);">
+                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase;">/ End &middot; Get in touch</span>
+                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase;">Barcelona &middot; 2026</span>
+                </div>
+
+                <!-- Big serif invitation -->
+                <h1 style="font-family: 'Times New Roman', serif; font-size: 96px; line-height: 0.95; letter-spacing: -0.04em; color: #F2F0EA; font-weight: 400; margin: 32px 0 28px;">Let's make<br>something.</h1>
+
+                <!-- Italic subtitle -->
+                <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 24px; line-height: 1.3; color: #9A9890; font-style: italic; letter-spacing: -0.01em; margin: 0 0 64px; max-width: 720px;">
+                    Open to studio roles, freelance commissions, and anything in between. Brand, editorial, after-hours culture.
+                </p>
+
+                <!-- Contact details — 4-column grid with hairline borders -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 24px 0; border-top: 0.5px solid rgba(232,230,224,0.14); border-bottom: 0.5px solid rgba(232,230,224,0.14); margin-bottom: 48px;">
+                    <div>
+                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">Email</div>
+                        <a href="mailto:paumoratodesign@gmail.com" style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; text-decoration: none; line-height: 1.3;">paumoratodesign@gmail.com</a>
+                    </div>
+                    <div>
+                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">Phone</div>
+                        <a href="tel:+34608823304" style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; text-decoration: none; line-height: 1.3;">+34 608 82 33 04</a>
+                    </div>
+                    <div>
+                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">Location</div>
+                        <div style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; line-height: 1.3;">Barcelona, ES</div>
+                    </div>
+                    <div>
+                        <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">LinkedIn</div>
+                        <a href="https://www.linkedin.com/in/pau-morat%C3%B3-sebasti%C3%A0-5554a01b2/" target="_blank" rel="noopener" style="font-family: 'Times New Roman', Georgia, serif; font-size: 16px; color: #E8E6E0; text-decoration: none; line-height: 1.3;">in/pau-morató-sebastià <span style="color: #6B6A64;">↗</span></a>
                     </div>
                 </div>
-                <p class="case-desc">Selected logo work — client commissions and personal explorations. A light entry, shown as a gallery.</p>
-                <div class="ch-placeholder" style="aspect-ratio: 16/6; margin: 20px 0 40px;">
-                    <span class="ch-placeholder-label">Gallery · 2—3 marks</span>
-                    <span class="ch-placeholder-center"><em>Not yet designed</em></span>
+
+                <!-- Closing italic line -->
+                <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 18px; line-height: 1.3; color: #9A9890; font-style: italic; letter-spacing: -0.005em; margin: 0; max-width: 540px;">
+                    This portfolio is my design CV. Read it slowly.
+                </p>
+
+                <!-- Bottom hairline -->
+                <div style="margin-top: 80px; padding-top: 16px; border-top: 0.5px solid rgba(232,230,224,0.14); display: flex; justify-content: space-between; align-items: baseline;">
+                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase;">© 2026 &middot; Pau Morató</span>
+                    <span style="font-family: 'Monaco','Menlo',monospace; font-size: 10px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase;">Designed in Barcelona</span>
                 </div>
             </section>
         </div>
@@ -1182,12 +1906,12 @@
         function updateURL(sectionId) {
             const urlElement = document.getElementById('url-path');
             if (urlElement) {
-                const urls = { 'index': '/', 'about': '/about', 'komando': '/work/komando', 'presskits': '/work/presskits', 'linkedin': '/work/linkedin-system', 'brand': '/work/brand-identity', 'marks': '/work/marks' };
+                const urls = { 'index': '/', 'about': '/about', 'komando': '/work/komando', 'presskits': '/work/presskits', 'linkedin': '/work/linkedin-system', 'marks': '/work/marks', 'contact': '/contact' };
                 urlElement.textContent = urls[sectionId] || '/';
             }
         }
 
-        function scrollTo(sectionId) { scrollToSection(sectionId); }
+        function goToSection(sectionId) { scrollToSection(sectionId); }
 
         function setupScrollTracking() {
             const scrollContainer = document.getElementById('main-scroll');
@@ -1204,8 +1928,32 @@
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function() { setupScrollTracking(); });
+        function setupReveals() {
+            const scrollContainer = document.getElementById('main-scroll');
+            if (!scrollContainer || !('IntersectionObserver' in window)) return;
+
+            const targets = scrollContainer.querySelectorAll('.chapter, .case-header, .case-desc');
+            targets.forEach(el => el.classList.add('reveal'));
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: scrollContainer,
+                rootMargin: '0px 0px -8% 0px',
+                threshold: 0.05
+            });
+
+            targets.forEach(el => observer.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() { setupScrollTracking(); setupReveals(); });
         setupScrollTracking();
+        setupReveals();
     </script>
 </body>
 </html>
