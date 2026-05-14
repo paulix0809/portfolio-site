@@ -359,6 +359,17 @@
             [style*="grid-template-columns: 1fr 1fr"] {
                 gap: 14px !important;
             }
+            /* Asymmetric 2-col layouts (Komando Flyers/Motion/In context, etc.) collapse to single column on mobile */
+            [style*="grid-template-columns: 1.2fr 1fr"],
+            [style*="grid-template-columns: 1fr 1.2fr"],
+            [style*="grid-template-columns: 1.4fr 1fr"],
+            [style*="grid-template-columns: 1fr 1.4fr"],
+            [style*="grid-template-columns: 2fr 1fr"],
+            [style*="grid-template-columns: 1fr 2fr"],
+            [style*="grid-template-columns: 1fr 340px"] {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
 
             /* Komando + Salut Games Identity stages — collapse to flowing column */
             [style*="position: relative; height: 780px"] {
@@ -381,10 +392,10 @@
                 width: auto !important;
                 max-width: 100% !important;
             }
-            /* Process bg fades but no longer covers/overlaps */
+            /* Process bg no longer overlaps the logo on mobile — show at full brightness */
             [style*="position: relative; height: 780px"] > div[style*="opacity: 0.18"] {
                 width: 100% !important;
-                opacity: 0.14 !important;
+                opacity: 1 !important;
                 order: -1;
             }
             /* Big logo images scale to fit */
