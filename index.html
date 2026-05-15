@@ -311,6 +311,14 @@
         .s3-spreads { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
         .s3-spread { aspect-ratio: 3/4; border-radius: 2px; position: relative; overflow: hidden; }
         .s3-spread img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .s3-spread-cap { position: absolute; bottom: 6px; left: 8px; font-family: 'Monaco','Menlo',monospace; font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: #F5F0E0; background: rgba(0,0,0,0.45); padding: 3px 6px; border-radius: 1px; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); pointer-events: none; }
+        .s3-full { display: flex; align-items: center; gap: 14px; margin-top: 14px; padding: 10px 12px; background: rgba(255,255,255,0.02); border: 0.5px solid rgba(245,240,224,0.08); border-radius: 3px; }
+        .s3-full-thumb { width: 56px; height: 56px; border-radius: 2px; overflow: hidden; flex-shrink: 0; cursor: zoom-in; }
+        .s3-full-thumb img { width: 100%; height: auto; display: block; }
+        .s3-full-text { flex: 1; min-width: 0; }
+        .s3-full-title { font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #F2F0EA; }
+        .s3-full-meta { font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #9A9890; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+        .s3-full-arr { font-family: 'Monaco','Menlo',monospace; font-size: 14px; color: #9A9890; }
         .s3-closing { margin-top: 36px; padding-top: 24px; border-top: 0.5px solid rgba(232,230,224,0.12); display: flex; justify-content: space-between; align-items: baseline; }
         .s3-closing-line { font-family: 'Times New Roman', Georgia, serif; font-size: 20px; color: #F2F0EA; font-style: italic; letter-spacing: -0.01em; }
         .s3-closing-meta { font-family: 'Monaco', 'Menlo', monospace; font-size: 9px; color: #9A9890; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -677,7 +685,7 @@
             inset: 0;
             z-index: 1000;
             display: flex;
-            align-items: center;
+            align-items: safe center;
             justify-content: center;
             padding: 32px;
             background: rgba(8, 8, 7, 0.88);
@@ -687,6 +695,8 @@
             visibility: hidden;
             transition: opacity 240ms cubic-bezier(0.2, 0.6, 0.2, 1), visibility 0s linear 240ms;
             cursor: zoom-out;
+            overflow-y: auto;
+            overscroll-behavior: contain;
         }
         .lightbox.is-open {
             opacity: 1;
@@ -695,16 +705,15 @@
         }
         .lightbox-img {
             max-width: min(92vw, 1800px);
-            max-height: 88vh;
             width: auto;
             height: auto;
-            object-fit: contain;
             display: block;
             border-radius: 4px;
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
             transform: scale(0.96);
             opacity: 0;
             transition: transform 320ms cubic-bezier(0.2, 0.6, 0.2, 1), opacity 260ms ease;
+            margin: auto 0;
         }
         .lightbox.is-open .lightbox-img {
             transform: scale(1);
@@ -1311,7 +1320,7 @@
                                     </div>
                                     <div>
                                         <div style="aspect-ratio: 3/4; border-radius: 2px; overflow: hidden;">
-                                            <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel Laarz Presskit Cover" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                                            <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL_01.png" alt="Axel Laarz Presskit Cover" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
                                         </div>
                                         <div style="font-family: 'Monaco','Menlo',monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 10px;">Fig. 01.I · Lead presskit · Axel Laarz cover</div>
                                     </div>
@@ -1446,19 +1455,19 @@
                                         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
                                             <div>
                                                 <div style="width: 100%; height: 260px; overflow: hidden; border-radius: 2px;">
-                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel presskit" style="width: 100%; display: block;">
+                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL_01.png" alt="Axel presskit" style="width: 100%; display: block;">
                                                 </div>
                                                 <div style="font-family: 'Monaco','Menlo',monospace; font-size: 8px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px;">Amber · Axel</div>
                                             </div>
                                             <div>
                                                 <div style="width: 100%; height: 260px; overflow: hidden; border-radius: 2px;">
-                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX.png" alt="PLX presskit" style="width: 100%; display: block;">
+                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX_01.png" alt="PLX presskit" style="width: 100%; display: block;">
                                                 </div>
                                                 <div style="font-family: 'Monaco','Menlo',monospace; font-size: 8px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px;">Lime · PLX</div>
                                             </div>
                                             <div>
                                                 <div style="width: 100%; height: 260px; overflow: hidden; border-radius: 2px;">
-                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME.png" alt="Save Me presskit" style="width: 100%; display: block;">
+                                                    <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME_01.png" alt="Save Me presskit" style="width: 100%; display: block;">
                                                 </div>
                                                 <div style="font-family: 'Monaco','Menlo',monospace; font-size: 8px; color: #6B6A64; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px;">Bone · Save Me</div>
                                             </div>
@@ -1482,14 +1491,25 @@
                                         <p class="s3-artist-bio">Powerful, precise, immersive — a hypnotic presence built on the weight of hardgroove and raw techno.</p>
                                         <div class="s3-spreads">
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel cover" style="object-position: top;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL_01.png" alt="Axel Laarz — Cover, About, Live">
+                                                <span class="s3-spread-cap">Cover · Bio · Live</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel mid" style="object-position: center 25%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL_02.png" alt="Axel Laarz — Hospitality & Technical rider">
+                                                <span class="s3-spread-cap">Rider</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel tech" style="object-position: center 55%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL_03.png" alt="Axel Laarz — Equipment & Contact">
+                                                <span class="s3-spread-cap">Equipment · Contact</span>
                                             </div>
+                                        </div>
+                                        <div class="s3-full">
+                                            <div class="s3-full-thumb"><img src="PORTFOLIO_ASSETS/PRESSKIT_AXEL.png" alt="Axel Laarz — complete presskit"></div>
+                                            <div class="s3-full-text">
+                                                <div class="s3-full-title">View complete presskit</div>
+                                                <div class="s3-full-meta">Full layout · Axel Laarz</div>
+                                            </div>
+                                            <div class="s3-full-arr">↗</div>
                                         </div>
                                     </div>
 
@@ -1502,14 +1522,25 @@
                                         <p class="s3-artist-bio">Experimental and tribal — deep atmospheres, shifting intensities, immersive sonic journeys.</p>
                                         <div class="s3-spreads">
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX.png" alt="PLX cover" style="object-position: top;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX_01.png" alt="PLX — Cover, About, Live">
+                                                <span class="s3-spread-cap">Cover · Bio · Live</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX.png" alt="PLX mid" style="object-position: center 25%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX_02.png" alt="PLX — Hospitality & Technical rider">
+                                                <span class="s3-spread-cap">Rider</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX.png" alt="PLX tech" style="object-position: center 55%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_PLX_03.png" alt="PLX — Equipment & Contact">
+                                                <span class="s3-spread-cap">Equipment · Contact</span>
                                             </div>
+                                        </div>
+                                        <div class="s3-full">
+                                            <div class="s3-full-thumb"><img src="PORTFOLIO_ASSETS/PRESSKIT_PLX.png" alt="PLX — complete presskit"></div>
+                                            <div class="s3-full-text">
+                                                <div class="s3-full-title">View complete presskit</div>
+                                                <div class="s3-full-meta">Full layout · PLX</div>
+                                            </div>
+                                            <div class="s3-full-arr">↗</div>
                                         </div>
                                     </div>
 
@@ -1522,14 +1553,25 @@
                                         <p class="s3-artist-bio">[Positioning line — tbd. Placeholder preserves the chapter structure.]</p>
                                         <div class="s3-spreads">
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME.png" alt="Save Me cover" style="object-position: top;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME_01.png" alt="Save Me — Cover, About, Live">
+                                                <span class="s3-spread-cap">Cover · Bio · Live</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME.png" alt="Save Me mid" style="object-position: center 25%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME_02.png" alt="Save Me — Hospitality & Technical rider">
+                                                <span class="s3-spread-cap">Rider</span>
                                             </div>
                                             <div class="s3-spread">
-                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME.png" alt="Save Me tech" style="object-position: center 55%;">
+                                                <img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME_03.png" alt="Save Me — Equipment & Contact">
+                                                <span class="s3-spread-cap">Equipment · Contact</span>
                                             </div>
+                                        </div>
+                                        <div class="s3-full">
+                                            <div class="s3-full-thumb"><img src="PORTFOLIO_ASSETS/PRESSKIT_SAVEME.png" alt="Save Me — complete presskit"></div>
+                                            <div class="s3-full-text">
+                                                <div class="s3-full-title">View complete presskit</div>
+                                                <div class="s3-full-meta">Full layout · Save Me</div>
+                                            </div>
+                                            <div class="s3-full-arr">↗</div>
                                         </div>
                                     </div>
 
