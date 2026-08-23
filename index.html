@@ -231,9 +231,9 @@
         .ch-pagelabel { font-family: 'Monaco', 'Menlo', monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.1em; text-transform: uppercase; }
         .ch-title { font-family: 'Times New Roman', Georgia, serif; font-size: 44px; color: #F2F0EA; letter-spacing: -0.02em; font-weight: 400; line-height: 1.05; margin: 20px 0 32px; }
         .ch-body { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
-        .ch-prose { font-family: 'Monaco', 'Menlo', monospace; font-size: 12px; color: #9A9890; line-height: 1.75; letter-spacing: 0.01em; max-width: 440px; }
-        .ch-prose p { margin: 0 0 14px; }
-        .ch-prose em { font-style: italic; color: #D8D4CA; font-family: 'Times New Roman', Georgia, serif; font-size: 16px; letter-spacing: -0.01em; }
+        .ch-prose { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; color: #9A9890; line-height: 1.65; letter-spacing: 0.005em; max-width: 480px; }
+        .ch-prose p { margin: 0 0 15px; }
+        .ch-prose em { font-style: italic; color: #D8D4CA; font-family: 'Times New Roman', Georgia, serif; font-size: 19px; letter-spacing: -0.01em; }
         .ch-placeholder { background: #141316; border-radius: 2px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .ch-placeholder::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0 1px, transparent 1px 4px); }
         .ch-placeholder-label { font-family: 'Monaco', 'Menlo', monospace; font-size: 9px; color: #6B6A64; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -247,7 +247,7 @@
         .about-leftcol .first { margin-top: 0; }
         .about-lead { font-family: 'Times New Roman', Georgia, serif; font-size: 48px; color: #F2F0EA; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 28px; font-weight: 400; }
         .about-lead .dot { color: #6B6A64; }
-        .about-sub { font-size: 14px; color: #9A9890; max-width: 520px; font-family: 'Monaco', 'Menlo', monospace; letter-spacing: 0.02em; line-height: 1.7; margin: 0 0 12px; }
+        .about-sub { font-size: 17px; color: #9A9890; max-width: 540px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 0.005em; line-height: 1.6; margin: 0 0 14px; }
         .about-sub.dim { color: #6B6A64; }
         .services { margin-top: 48px; padding-top: 24px; border-top: 0.5px solid rgba(232,230,224,0.12); }
         .services-header { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6A64; margin-bottom: 22px; font-family: 'Monaco', 'Menlo', monospace; }
@@ -827,15 +827,22 @@
                     <span class="proj-year">2025—</span>
                     <span class="arr">→</span>
                 </button>
-                <button class="proj-row" onclick="goToSection('marks')">
+                <button class="proj-row" onclick="goToSection('arrel')">
                     <span class="proj-num">04</span>
+                    <span class="proj-name"><span class="dot-mark" style="background: #93b19f;"></span>Arrel AI</span>
+                    <span class="proj-tag">Motion · AI content</span>
+                    <span class="proj-year">2026</span>
+                    <span class="arr">→</span>
+                </button>
+                <button class="proj-row" onclick="goToSection('marks')">
+                    <span class="proj-num">05</span>
                     <span class="proj-name"><span class="dot-mark" style="background: #5A5954;"></span>Marks</span>
                     <span class="proj-tag">Logos · Selected</span>
                     <span class="proj-year">2020—23</span>
                     <span class="arr">→</span>
                 </button>
                 <div class="foot">
-                    <span><span class="live-dot"></span>Barcelona · ES</span><span>04 / 04</span><span>INDEX · 2026</span>
+                    <span><span class="live-dot"></span>Barcelona · ES</span><span>05 / 05</span><span>INDEX · 2026</span>
                 </div>
             </section>
 
@@ -845,7 +852,7 @@
                     <!-- Left: text content -->
                     <div>
                         <p class="about-lead">Designer<span class="dot">.</span> Barcelona<span class="dot">.</span> Brand &amp; content systems<span class="dot">.</span></p>
-                        <p class="about-sub">I work with founders and cultural projects that need a visual identity to hold up in a carousel, on a flyer, and in a pitch deck.</p>
+                        <p class="about-sub">I work with founders and cultural projects that need a visual identity to hold up in a carousel, on a flyer, in a pitch deck — and, increasingly, in motion built with code.</p>
                         <p class="about-sub dim">Clients: solo founders · boutique agencies · event promoters. Currently taking on work for 2026.</p>
 
                         <!-- Details row -->
@@ -869,11 +876,12 @@
                         </div>
 
                         <div class="services">
-                            <div class="services-header">Services · 03</div>
+                            <div class="services-header">Services · 04</div>
                             <div class="svc-grid">
                                 <div class="svc-item"><div class="svc-num">I.</div><div class="svc-name">Brand identity</div><div class="svc-desc">Logos · systems · guidelines · rollout</div></div>
                                 <div class="svc-item"><div class="svc-num">II.</div><div class="svc-name">Content design</div><div class="svc-desc">LinkedIn · editorial · infographics</div></div>
                                 <div class="svc-item"><div class="svc-num">III.</div><div class="svc-name">Event &amp; culture</div><div class="svc-desc">Flyers · posters · promo · motion</div></div>
+                                <div class="svc-item"><div class="svc-num">IV.</div><div class="svc-name">Motion &amp; code</div><div class="svc-desc">Remotion · animated posts · React</div></div>
                             </div>
                         </div>
 
@@ -883,11 +891,30 @@
                             <div style="display: flex; flex-wrap: wrap; gap: 10px 18px;">
                                 <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Figma</span>
                                 <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
-                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Adobe</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Photoshop</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Adobe Suite</span>
                                 <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
                                 <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Canva</span>
                                 <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
-                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">AI tools</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Remotion</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Artifacts</span>
+                            </div>
+                        </div>
+
+                        <!-- AI — core to the workflow -->
+                        <div style="margin-top: 22px; padding-top: 14px; border-top: 0.5px solid rgba(147,177,159,0.30);">
+                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 8px; color: #93b19f; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px;">AI · core to the workflow</div>
+                            <div style="font-family: 'Monaco','Menlo',monospace; font-size: 11px; color: #6B6A64; letter-spacing: 0.02em; line-height: 1.6; margin-bottom: 12px;">Used every day — ideation, imagery, copy, and motion.</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px 18px;">
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Claude</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">ChatGPT</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Higgsfield</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #6B6A64;">·</span>
+                                <span style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; color: #E8E6E0;">Image generation</span>
                             </div>
                         </div>
                         <div class="contact-bar">
@@ -898,7 +925,7 @@
 
                     <!-- Right: profile photo -->
                     <div style="position: relative; width: 100%; aspect-ratio: 1;">
-                        <img src="PORTFOLIO_ASSETS/PROFILE_PIC.png" alt="Pau Morató" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.7);">
+                        <img src="PORTFOLIO_ASSETS/PROFILE_PIC_2026.jpg" alt="Pau Morató" style="width: 100%; height: 100%; object-fit: cover; object-position: center 28%; display: block; filter: brightness(0.78);">
                         <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 35%, #0A0A0C 75%); pointer-events: none;"></div>
                     </div>
                 </div>
@@ -920,6 +947,7 @@
                             <!-- Jump to other case studies -->
                             <div class="toc-other-section">
                                 <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('arrel')"><span>Arrel AI</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
@@ -1306,6 +1334,7 @@
                             <!-- Jump to other case studies -->
                             <div class="toc-other-section">
                                 <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('arrel')"><span>Arrel AI</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
@@ -1626,15 +1655,19 @@
                 <div class="case-content" style="padding: 0;">
                     <div class="case-grid">
                         <div class="toc-sticky">
-                            <div class="toc-header">Chapters · 04</div>
+                            <div class="toc-header">Chapters · 07</div>
                             <button class="toc-item active" data-anchor="l-ch01" onclick="goToSection('l-ch01')"><span class="toc-num">01</span><span class="toc-name">The system</span></button>
                             <button class="toc-item" data-anchor="l-ch02" onclick="goToSection('l-ch02')"><span class="toc-num">02</span><span class="toc-name">Frameworks</span></button>
                             <button class="toc-item" data-anchor="l-ch03" onclick="goToSection('l-ch03')"><span class="toc-num">03</span><span class="toc-name">Palette study</span></button>
                             <button class="toc-item" data-anchor="l-ch04" onclick="goToSection('l-ch04')"><span class="toc-num">04</span><span class="toc-name">Stack</span></button>
+                            <button class="toc-item" data-anchor="l-ch05" onclick="goToSection('l-ch05')"><span class="toc-num">05</span><span class="toc-name">Styles</span></button>
+                            <button class="toc-item" data-anchor="l-ch06" onclick="goToSection('l-ch06')"><span class="toc-num">06</span><span class="toc-name">How it's made</span></button>
+                            <button class="toc-item" data-anchor="l-ch07" onclick="goToSection('l-ch07')"><span class="toc-num">07</span><span class="toc-name">In motion</span></button>
 
                             <!-- Jump to other case studies -->
                             <div class="toc-other-section">
                                 <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('arrel')"><span>Arrel AI</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
@@ -1647,14 +1680,14 @@
                                 <div class="case-meta">
                                     <span><b>Year</b> 2025—</span><br>
                                     <span><b>Scope</b> Ongoing retainer</span><br>
-                                    <span><b>Chapters</b> 04</span>
+                                    <span><b>Chapters</b> 07</span>
                                 </div>
                             </div>
                             <p class="case-desc">Single-post system for two GTM executives. Same architecture, different voices.</p>
                             <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; color: #9A9890; max-width: 680px; margin: -32px 0 56px;">A content design system for cold-outbound B2B founders &mdash; posts that don't look like junior-marketer work, with frameworks that scale across topics. The constraint was that LinkedIn's feed punishes anything visually loud, and the audience scrolls fast. The tradeoff: a small kit of strict templates (the 1% framework, the pyramid, the dark Tech Stack), with palette doing the variety, so a single post is unmistakable and a series builds recognition.</p>
 
                             <section class="chapter" id="l-ch01">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 04</span><span class="ch-pagelabel">The system</span></div>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 07</span><span class="ch-pagelabel">The system</span></div>
                                 <h2 class="ch-title">The system</h2>
                                 <div class="ch-body">
                                     <div class="ch-prose">
@@ -1670,7 +1703,7 @@
                             </section>
 
                             <section class="chapter" id="l-ch02">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 04</span><span class="ch-pagelabel">Frameworks</span></div>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 07</span><span class="ch-pagelabel">Frameworks</span></div>
                                 <h2 class="ch-title">Frameworks</h2>
                                 <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
                                     <p><em>Strategy, distilled to one image.</em></p>
@@ -1693,7 +1726,7 @@
                             </section>
 
                             <section class="chapter" id="l-ch03">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 03 of 04</span><span class="ch-pagelabel">Palette study</span></div>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 03 of 07</span><span class="ch-pagelabel">Palette study</span></div>
                                 <h2 class="ch-title">Palette study</h2>
                                 <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
                                     <p><em>Same post. Three palettes.</em></p>
@@ -1716,7 +1749,7 @@
                             </section>
 
                             <section class="chapter" id="l-ch04">
-                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 04 of 04</span><span class="ch-pagelabel">Stack</span></div>
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 04 of 07</span><span class="ch-pagelabel">Stack</span></div>
                                 <h2 class="ch-title">Stack</h2>
                                 <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
                                     <p><em>Tools, made visible.</em></p>
@@ -1737,6 +1770,249 @@
                                     </div>
                                 </div>
                             </section>
+
+                            <section class="chapter" id="l-ch05">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 05 of 07</span><span class="ch-pagelabel">Styles</span></div>
+                                <h2 class="ch-title">Styles</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 36px;">
+                                    <p><em>One system. Many skins.</em></p>
+                                    <p>The same frameworks, generated in completely different visual languages — so a weekly series never looks repetitive, and every post still feels built, not templated.</p>
+                                </div>
+
+                                <!-- Style row 1 — Marker -->
+                                <div style="margin-bottom: 40px;">
+                                    <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px; padding-bottom:8px; border-bottom:0.5px solid rgba(232,230,224,0.12);">
+                                        <span style="font-family:'Times New Roman',Georgia,serif; font-size:19px; color:#E8E6E0; letter-spacing:-0.01em;">Marker</span>
+                                        <span style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#6B6A64; letter-spacing:0.04em; text-transform:uppercase;">Hand-drawn energy on black</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px;">
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">1% framework</span><img src="PORTFOLIO_ASSETS/LI_1PCT_SKETCH.jpg" alt="1% cold email framework — marker style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">Follow the path</span><img src="PORTFOLIO_ASSETS/LI_PATH.jpg" alt="Follow the path — marker style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">7 intent signals</span><img src="PORTFOLIO_ASSETS/LI_MARKER_SIGNALS.jpg" alt="7 intent signals — marker style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Style row 2 — Technical -->
+                                <div style="margin-bottom: 40px;">
+                                    <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px; padding-bottom:8px; border-bottom:0.5px solid rgba(232,230,224,0.12);">
+                                        <span style="font-family:'Times New Roman',Georgia,serif; font-size:19px; color:#E8E6E0; letter-spacing:-0.01em;">Technical</span>
+                                        <span style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#6B6A64; letter-spacing:0.04em; text-transform:uppercase;">Terminal readout · matrix green</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px;">
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">1% framework</span><img src="PORTFOLIO_ASSETS/LI_1PCT_TECH.jpg" alt="1% cold email framework — technical style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">Lookalike method</span><img src="PORTFOLIO_ASSETS/LI_LOOKALIKE.jpg" alt="Lookalike method — technical style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">Tech stack</span><img src="PORTFOLIO_ASSETS/LI_TECH_STACK.jpg" alt="Tech stack — technical style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Style row 3 — Cards -->
+                                <div>
+                                    <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px; padding-bottom:8px; border-bottom:0.5px solid rgba(232,230,224,0.12);">
+                                        <span style="font-family:'Times New Roman',Georgia,serif; font-size:19px; color:#E8E6E0; letter-spacing:-0.01em;">Cards</span>
+                                        <span style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#6B6A64; letter-spacing:0.04em; text-transform:uppercase;">Warm · editorial · print-inspired</span>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px;">
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">5 mistakes</span><img src="PORTFOLIO_ASSETS/LI_CARD_MISTAKES.jpg" alt="5 mistakes — cards style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">Lookalike method</span><img src="PORTFOLIO_ASSETS/LI_CARD_LOOKALIKE.jpg" alt="Lookalike method — cards style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                        <div><span class="ch-placeholder-label" style="margin-bottom:6px; display:block;">Tech stack</span><img src="PORTFOLIO_ASSETS/LI_CARD_STACK.jpg" alt="Tech stack — cards style" style="width:100%; height:auto; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.3);"></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="l-ch06">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 06 of 07</span><span class="ch-pagelabel">How it's made</span></div>
+                                <h2 class="ch-title">How it's made</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 36px;">
+                                    <p><em>Idea to feed, in an afternoon.</em></p>
+                                    <p>Every post runs through the same short pipeline — AI-assisted for speed, hand-finished so it never looks generated.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px;">
+                                    <div style="border-top:0.5px solid rgba(232,230,224,0.22); padding-top:12px;">
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:34px; color:#E8E6E0; line-height:1; margin-bottom:10px;">01</div>
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#F2F0EA; margin-bottom:7px;">Idea</div>
+                                        <div style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#9A9890; line-height:1.65;">One strategic point worth a whole post.</div>
+                                    </div>
+                                    <div style="border-top:0.5px solid rgba(232,230,224,0.22); padding-top:12px;">
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:34px; color:#E8E6E0; line-height:1; margin-bottom:10px;">02</div>
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#F2F0EA; margin-bottom:7px;">Skeleton</div>
+                                        <div style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#9A9890; line-height:1.65;">Claude, wired to Figma, drafts the layout — structure, hierarchy, blocks — in one pass.</div>
+                                    </div>
+                                    <div style="border-top:0.5px solid rgba(232,230,224,0.22); padding-top:12px;">
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:34px; color:#E8E6E0; line-height:1; margin-bottom:10px;">03</div>
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#F2F0EA; margin-bottom:7px;">Retouch</div>
+                                        <div style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#9A9890; line-height:1.65;">By hand in Figma: type, spacing, colour — the details that make it feel designed.</div>
+                                    </div>
+                                    <div style="border-top:0.5px solid rgba(232,230,224,0.22); padding-top:12px;">
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:34px; color:#E8E6E0; line-height:1; margin-bottom:10px;">04</div>
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#F2F0EA; margin-bottom:7px;">Export</div>
+                                        <div style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#9A9890; line-height:1.65;">Export the frame, ready for the feed.</div>
+                                    </div>
+                                    <div style="border-top:0.5px solid rgba(147,177,159,0.5); padding-top:12px;">
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:34px; color:#93b19f; line-height:1; margin-bottom:10px;">05</div>
+                                        <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#F2F0EA; margin-bottom:7px;">Motion</div>
+                                        <div style="font-family:'Monaco','Menlo',monospace; font-size:10px; color:#9A9890; line-height:1.65;">When it needs to move, the frame goes into <span style="color:#93b19f;">Remotion</span> and becomes animation.</div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="l-ch07">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 07 of 07</span><span class="ch-pagelabel">In motion</span></div>
+                                <h2 class="ch-title">In motion</h2>
+                                <div class="ch-body">
+                                    <div class="ch-prose">
+                                        <p><em>When a post stops being still.</em></p>
+                                        <p>The newest layer of the system: the same frameworks, animated in code with <span style="color:#93b19f;">Remotion</span> — a static image becomes a scroll-stopper without ever leaving the brand.</p>
+                                        <p>This one is a perfect 15-second loop: a radar sweep that lights each of the seven intent signals in turn, then starts again with no visible seam.</p>
+                                        <p>I also built a full motion set for arrel.ai. <button onclick="goToSection('arrel')" style="background:none; border:none; padding:0; margin:0; cursor:pointer; font-family:'Monaco','Menlo',monospace; font-size:12px; color:#93b19f; letter-spacing:0.02em;">See the Arrel AI case →</button></p>
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 10px; display: block;">FIG. 07.I · ColdIQ · 7 signals · radar loop</span>
+                                        <video src="PORTFOLIO_ASSETS/LI_MOV_RADAR.mp4" poster="PORTFOLIO_ASSETS/LI_POSTER_RADAR.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ColdIQ — 7 intent signals, animated radar loop" style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); background: #0A0A0C;"></video>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ARREL AI CASE STUDY -->
+            <section class="section" id="arrel">
+                <div class="case-content" style="padding: 0;">
+                    <div class="case-grid">
+                        <div class="toc-sticky">
+                            <div class="toc-header">Chapters · 04</div>
+                            <button class="toc-item active" data-anchor="a-ch01" onclick="goToSection('a-ch01')"><span class="toc-num">01</span><span class="toc-name">The pitch</span></button>
+                            <button class="toc-item" data-anchor="a-ch02" onclick="goToSection('a-ch02')"><span class="toc-num">02</span><span class="toc-name">Brand match</span></button>
+                            <button class="toc-item" data-anchor="a-ch03" onclick="goToSection('a-ch03')"><span class="toc-num">03</span><span class="toc-name">In motion</span></button>
+                            <button class="toc-item" data-anchor="a-ch04" onclick="goToSection('a-ch04')"><span class="toc-num">04</span><span class="toc-name">How it's built</span></button>
+
+                            <!-- Jump to other case studies -->
+                            <div class="toc-other-section">
+                                <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other" onclick="goToSection('marks')"><span>Marks</span><span class="toc-other-arr">→</span></button>
+                                <button class="toc-other toc-back" onclick="goToSection('index')"><span>↑ All work</span></button>
+                            </div>
+                        </div>
+                        <div class="case-main">
+                            <div class="case-header">
+                                <h1 class="case-title">Arrel AI</h1>
+                                <div class="case-meta">
+                                    <span><b>Year</b> 2026</span><br>
+                                    <span><b>Scope</b> Content · Motion</span><br>
+                                    <span><b>Chapters</b> 04</span>
+                                </div>
+                            </div>
+                            <p class="case-desc">A pitch, told in their own brand — then set in motion.</p>
+                            <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 15px; line-height: 1.6; color: #9A9890; max-width: 680px; margin: -32px 0 56px;">arrel.ai is a B2B sales-tech startup building outbound prospecting tools. To win them as a client, I didn't send a deck &mdash; I rebuilt a proven LinkedIn post series entirely in <em style="color:#D8D4CA; font-style: italic;">their</em> visual language, sampled by hand from a single real post of theirs. Then I took the step most designers stop before: I animated the posts with motion built in code (Remotion), so a static feed became something that moves. Self-initiated &mdash; a spec project made to prove the level.</p>
+
+                            <!-- Brand mark: 3D + 2D logos -->
+                            <div style="display:flex; align-items:center; gap:36px 44px; flex-wrap:wrap; margin: 0 0 60px; padding: 30px 0; border-top:0.5px solid rgba(232,230,224,0.12); border-bottom:0.5px solid rgba(232,230,224,0.12);">
+                                <div style="position:relative; flex:0 0 auto;">
+                                    <div style="position:absolute; inset:-32%; background:radial-gradient(circle at 50% 46%, rgba(147,177,159,0.20), transparent 66%); pointer-events:none;"></div>
+                                    <img src="PORTFOLIO_ASSETS/ARREL_LOGO_3D.png" alt="arrel.ai — 3D brand mark" style="position:relative; display:block; width:136px; height:auto;">
+                                </div>
+                                <div style="flex:0 0 auto;">
+                                    <img src="PORTFOLIO_ASSETS/ARREL_LOGO_2D.png" alt="arrel.ai — 2D flat mark" style="display:block; width:92px; height:auto; border-radius:16px; box-shadow:0 6px 18px rgba(0,0,0,0.35);">
+                                </div>
+                                <div style="flex:1 1 220px; min-width:200px;">
+                                    <div style="font-family:'Monaco','Menlo',monospace; font-size:9px; color:#6B6A64; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:9px;">The mark</div>
+                                    <div style="font-family:'Times New Roman',Georgia,serif; font-size:17px; color:#E8E6E0; line-height:1.4;">Their identity in two states &mdash; a dimensional <span style="color:#93b19f;">3D</span> icon and its flat <span style="color:#93b19f;">2D</span> lockup. The 3D mark signs every post.</div>
+                                </div>
+                            </div>
+
+                            <section class="chapter" id="a-ch01">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 01 of 04</span><span class="ch-pagelabel">The pitch</span></div>
+                                <h2 class="ch-title">The pitch</h2>
+                                <div class="ch-body">
+                                    <div class="ch-prose">
+                                        <p><em>Speak their language before they ask.</em></p>
+                                        <p>arrel.ai lives in cold-outbound B2B — the same world as the content system I already run. So instead of pitching in the abstract, I rebuilt that series as if it were already theirs.</p>
+                                        <p>One accent green, one warm espresso ground, cream tags, a copper dot. Every post reads as arrel before you read a word — proof I can design inside a brand, not just around it.</p>
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 10px; display: block;">FIG. 01.I · 5 mistakes · re-skinned to arrel</span>
+                                        <img src="PORTFOLIO_ASSETS/ARREL_POST_MISTAKES.jpg" alt="arrel.ai — 5 mistakes killing your reply rate, cheat-sheet post" style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="a-ch02">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 02 of 04</span><span class="ch-pagelabel">Brand match</span></div>
+                                <h2 class="ch-title">Brand match</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
+                                    <p><em>Brand locked — now in production.</em></p>
+                                    <p>Sampled from a single reference, the system is now fixed: sage-green pills (<span style="color:#93b19f;">#93b19f→#37624c</span>), an espresso gradient ground, cream map-labels, a copper accent (<span style="color:#c07a34;">#c07a34</span>), and a bold grotesque headline. With the kit locked, every post snaps into the brand — here it is across three very different layouts.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.I · GTM tech stack, mapped</span>
+                                        <img src="PORTFOLIO_ASSETS/ARREL_POST_TECHSTACK.jpg" alt="arrel.ai — the 2026 GTM tech stack, radial map post" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.II · The outbound matrix</span>
+                                        <img src="PORTFOLIO_ASSETS/ARREL_POST_MATRIX2.jpg" alt="arrel.ai — the outbound matrix, Fit by Intent 2x2 post" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 02.III · 7 intent signals</span>
+                                        <img src="PORTFOLIO_ASSETS/ARREL_POST_SIGNALS.jpg" alt="arrel.ai — 7 intent signals to reach prospects, list post" style="width: 100%; height: auto; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3);">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="a-ch03">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 03 of 04</span><span class="ch-pagelabel">In motion</span></div>
+                                <h2 class="ch-title">In motion</h2>
+                                <div class="ch-prose" style="max-width: 640px; margin-bottom: 28px;">
+                                    <p><em>The same posts — animated in code.</em></p>
+                                    <p>Not After Effects. Each piece is built in React with <span style="color:#93b19f;">Remotion</span>, so the design and the animation share one source. Every reaction is triggered by the story: the line lights the signals, the tiers ignite in sequence, the layers stack and breathe.</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.I · 7 intent signals</span>
+                                        <video src="PORTFOLIO_ASSETS/ARREL_MOV_SIGNALS.mp4" poster="PORTFOLIO_ASSETS/ARREL_POSTER_SIGNALS.jpg" autoplay muted loop playsinline preload="metadata" aria-label="arrel.ai — 7 intent signals, animated. A glowing ball travels a green path and lights each signal in turn." style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3); background: #191410;"></video>
+                                        <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 13px; color: #9A9890; line-height: 1.4; margin: 8px 0 0;">A glowing ball follows the line and lights each signal as it passes.</p>
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.II · Lookalike method</span>
+                                        <video src="PORTFOLIO_ASSETS/ARREL_MOV_PYRAMID.mp4" poster="PORTFOLIO_ASSETS/ARREL_POSTER_PYRAMID.jpg" autoplay muted loop playsinline preload="metadata" aria-label="arrel.ai — the lookalike prospecting method, animated. A 3D pyramid whose four tiers light up one by one." style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3); background: #191410;"></video>
+                                        <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 13px; color: #9A9890; line-height: 1.4; margin: 8px 0 0;">Four tiers ignite top to bottom, each rebuilt as its own layer.</p>
+                                    </div>
+                                    <div>
+                                        <span class="ch-placeholder-label" style="margin-bottom: 6px; display: block;">FIG. 03.III · The outbound engine</span>
+                                        <video src="PORTFOLIO_ASSETS/ARREL_MOV_ENGINE.mp4" poster="PORTFOLIO_ASSETS/ARREL_POSTER_ENGINE.jpg" autoplay muted loop playsinline preload="metadata" aria-label="arrel.ai — the outbound engine, animated. Five isometric 3D slabs stack with a soft bounce and then float." style="width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.3); background: #191410;"></video>
+                                        <p style="font-family: 'Times New Roman', Georgia, serif; font-size: 13px; color: #9A9890; line-height: 1.4; margin: 8px 0 0;">Five 3D layers stack with a soft bounce, then levitate on a slow wave.</p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="chapter" id="a-ch04">
+                                <div class="ch-headrow"><span class="ch-label"><b>Chapter</b> 04 of 04</span><span class="ch-pagelabel">How it's built</span></div>
+                                <h2 class="ch-title">How it's built</h2>
+                                <div class="ch-body">
+                                    <div class="ch-prose">
+                                        <p><em>A pipeline, not a plugin.</em></p>
+                                        <p>I designed each post in Figma, recoloured it to arrel, then rebuilt it as code so it could animate. The whole thing runs from one render command — change a number, re-render, done.</p>
+                                        <p>This is the part I learned after this portfolio first went live: motion design driven by code, not timelines.</p>
+                                    </div>
+                                    <div style="font-family: 'Monaco','Menlo',monospace; font-size: 11px; color: #9A9890; letter-spacing: 0.02em; line-height: 1.7;">
+                                        <div style="display:grid; grid-template-columns: 92px 1fr; gap: 6px 16px; padding-top: 6px; border-top: 0.5px solid rgba(232,230,224,0.15);">
+                                            <span style="color:#6B6A64; text-transform:uppercase; letter-spacing:0.08em; font-size:9px; padding-top:2px;">Source</span><span style="color:#E8E6E0;">Figma frame → recoloured to arrel</span>
+                                            <span style="color:#6B6A64; text-transform:uppercase; letter-spacing:0.08em; font-size:9px; padding-top:2px;">Build</span><span style="color:#E8E6E0;">React + TypeScript · Remotion 4</span>
+                                            <span style="color:#6B6A64; text-transform:uppercase; letter-spacing:0.08em; font-size:9px; padding-top:2px;">Motion</span><span style="color:#E8E6E0;">Per-element triggers · spring easing</span>
+                                            <span style="color:#6B6A64; text-transform:uppercase; letter-spacing:0.08em; font-size:9px; padding-top:2px;">Format</span><span style="color:#E8E6E0;">1080 × 1350 · 30 fps · MP4</span>
+                                            <span style="color:#6B6A64; text-transform:uppercase; letter-spacing:0.08em; font-size:9px; padding-top:2px;">Render</span><span style="color:#E8E6E0;">One headless command</span>
+                                        </div>
+                                        <div style="margin-top:18px; padding:14px 16px; border-radius:4px; background:radial-gradient(135% 130% at 12% -5%, #1d1813, #191410 38%, #34271c 100%); border:0.5px solid rgba(255,255,255,0.09);">
+                                            <span style="color:#93b19f; text-transform:uppercase; letter-spacing:0.12em; font-size:9px;">Result</span>
+                                            <div style="color:#E8E6E0; font-family:'Times New Roman', Georgia, serif; font-size:15px; letter-spacing:-0.01em; margin-top:6px; line-height:1.4;">Three static posts became three animations — same brand, now in motion.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -1754,6 +2030,7 @@
                             <!-- Jump to other case studies -->
                             <div class="toc-other-section">
                                 <div class="toc-other-header">Other work</div>
+                                <button class="toc-other" onclick="goToSection('arrel')"><span>Arrel AI</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('komando')"><span>Kømandø</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('presskits')"><span>Presskits</span><span class="toc-other-arr">→</span></button>
                                 <button class="toc-other" onclick="goToSection('linkedin')"><span>LinkedIn system</span><span class="toc-other-arr">→</span></button>
@@ -2111,7 +2388,7 @@
         function updateURL(sectionId) {
             const urlElement = document.getElementById('url-path');
             if (urlElement) {
-                const urls = { 'index': '/', 'about': '/about', 'komando': '/work/komando', 'presskits': '/work/presskits', 'linkedin': '/work/linkedin-system', 'marks': '/work/marks', 'contact': '/contact' };
+                const urls = { 'index': '/', 'about': '/about', 'komando': '/work/komando', 'presskits': '/work/presskits', 'linkedin': '/work/linkedin-system', 'marks': '/work/marks', 'arrel': '/work/arrel', 'contact': '/contact' };
                 urlElement.textContent = urls[sectionId] || '/';
             }
         }
